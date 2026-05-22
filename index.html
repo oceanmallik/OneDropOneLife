@@ -1,7 +1,55 @@
 <!DOCTYPE html>
-<html>
-    <head></head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="DIUBlood helps people find nearby blood donors fast with a simple, friendly, and urgent-first landing page."
+        />
+        <title>DIUBlood | Find Blood Donors Fast</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
     <body>
-        <h1>Hello, World!</h1>
+        <div class="page-shell">
+            <header class="topbar">
+                <a class="brand" href="#home" aria-label="DIUBlood home">
+                    <span class="brand-mark">D</span>
+                    <span class="brand-text">DIUBlood</span>
+                </a>
+            </header>
+
+            <main id="home">
+                <section class="hero">
+                    <div class="hero-copy">
+                        <p class="eyebrow">Blood donor matching for urgent moments</p>
+                        <h1>Find blood donors fast.</h1>
+                        <p class="lead">
+                            DIUBlood is a simple startup landing page for connecting people
+                            who need blood with nearby volunteer donors.
+                        </p>
+                        <div class="hero-actions">
+                            <a class="button button-primary" href="#contact">Request help</a>
+                            <a class="button button-secondary" href="#donors">Become a donor</a>
+                        </div>
+                    </div>
+
+                    <aside class="hero-panel" aria-label="Quick intro card">
+                        <div class="panel-card panel-highlight">
+                            <span class="panel-label">Launch page</span>
+                            <h2>DIUBlood is in progress</h2>
+                            <p>A clean starting point for the blood donor platform.</p>
+                        </div>
+                    </aside>
+                </section>
+
+            </main>
+        </div>
     </body>
 </html>
