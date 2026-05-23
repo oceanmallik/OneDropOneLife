@@ -26,5 +26,12 @@
         "Blood Group": "A+",
         "Address": "RASG 1",
         "Contact Number": "8801535454636"
+    },
+    {
+        "Name": "Bill Gates",
+        "ID": "261-51-004",
+        "Blood Group": "O-",
+        "Address": "YKSG-1",
+        "Contact Number": "8801727869500"
     }
 ]

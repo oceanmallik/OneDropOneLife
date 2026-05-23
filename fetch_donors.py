@@ -1,6 +1,7 @@
 import csv
 import json
 import urllib.request
+import re
 
 # Your exact published Google Sheets CSV URL
 SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQZkS9QtZeWOZUtbWkQN3Z7kbtv0itx6m7xnqwx-EpYkq0FHvpZOYohijb3uS8VVst7sOOKpRAJWcBs/pub?gid=0&single=true&output=csv"
@@ -10,23 +11,60 @@ OUTPUT_FILE = "donors.json"
 HEADER_MAP = {
     "Name": ["Name", "Full Name", "Donor Name"],
     "ID": ["ID", "Student ID", "Varsity ID"],
-    "Blood Group": ["Blood Group", "Blood Type", "Blood"],
+    "Blood Group": ["Blood Group", "Blood Type", "Blood", "Group"],
     "Address": ["Address", "Location", "Area", "Present Address"],
     "Contact Number": ["Contact Number", "Phone Number", "Phone", "Contact", "Mobile"]
 }
 
-# SETTINGS FOR IGNORING RAW ROWS
-# If row 1 is a merged title banner, set this to 1. If rows 1 and 2 are title/notes, set to 2.
 ROWS_TO_SKIP_AT_TOP = 1
 
+def clean_bangladeshi_phone(raw_phone):
+    """
+    Cleans and normalizes alternative input formats into a standardized 13-digit 
+    string starting explicitly with '8801XXXXXXXX'.
+    """
+    if not raw_phone:
+        return ""
+        
+    # Step 1: Keep only numbers (removes +, -, spaces, or brackets)
+    digits = re.sub(r'\D', '', str(raw_phone))
+    
+    if not digits:
+        return ""
+
+    # Step 2: Handle 11-digit entry format (e.g., 017XXXXXXXX)
+    if len(digits) == 11 and digits.startswith("01"):
+        return f"88{digits}"
+        
+    # Step 3: Handle 10-digit entry format (e.g., 17XXXXXXXX if leading zero dropped)
+    if len(digits) == 10 and digits.startswith("1"):
+        return f"880{digits}"
+        
+    # Step 4: Handle 13-digit format (e.g., 8801XXXXXXXX)
+    if len(digits) == 13 and digits.startswith("8801"):
+        return digits
+
+    # Fallback: If it's a completely weird length or landline number, return digits as-is
+    return digits
+
 def normalize_row(raw_row):
+    """
+    Translates a row from whatever headers the Google Sheet uses
+    into the exact keys the website's frontend expects.
+    """
     normalized = {}
     
     for expected_key, alternative_names in HEADER_MAP.items():
         found = False
         for alt_name in alternative_names:
             if alt_name in raw_row:
-                normalized[expected_key] = raw_row[alt_name].strip()
+                val = raw_row[alt_name].strip()
+                
+                # If processing the Contact Number, pass it through our normalization engine
+                if expected_key == "Contact Number":
+                    val = clean_bangladeshi_phone(val)
+                    
+                normalized[expected_key] = val
                 found = True
                 break
         if not found:
@@ -40,10 +78,8 @@ def fetch_data():
         response = urllib.request.urlopen(SHEET_URL)
         raw_lines = [line.decode('utf-8') for line in response.readlines()]
         
-        # --- FEATURE 1: Skip top title rows ---
         if ROWS_TO_SKIP_AT_TOP > 0:
             print(f"Skipping the first {ROWS_TO_SKIP_AT_TOP} line(s) of the sheet...")
-            # Slice the list to remove the top decorative rows
             data_lines = raw_lines[ROWS_TO_SKIP_AT_TOP:]
         else:
             data_lines = raw_lines
@@ -54,15 +90,11 @@ def fetch_data():
         for row in reader:
             clean_row = normalize_row(row)
             
-            # --- FEATURE 2: Ignore invalid, blank, or broken rows ---
-            # If a row doesn't have a Name and doesn't have an ID, it's an accidental row. Ignore it.
             if not clean_row["Name"] and not clean_row["ID"]:
-                print("Skipped an empty or non-donor row.")
                 continue
                 
             donor_list.append(clean_row)
         
-        # Save as a formatted JSON database file in the root
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
             json.dump(donor_list, f, indent=4, ensure_ascii=False)
             
