@@ -654,3 +654,58 @@ a {
 		grid-template-columns: minmax(0, 320px);
 	}
 }
+
+/* Mobile-only performance & visual simplifications */
+@media (max-width: 600px) {
+	/* Remove subtle grid overlay to reduce repaints */
+	body::before {
+		display: none;
+	}
+
+	/* Reduce heavy blur/shadow effects that cause jank on low-power devices */
+	.hero,
+	.panel-card,
+	.section-heading,
+	.contact-band,
+	.donor-record-card {
+		backdrop-filter: none !important;
+		-webkit-backdrop-filter: none !important;
+		box-shadow: none !important;
+		border-radius: 14px;
+		background: rgba(26, 15, 19, 0.92);
+		border: 1px solid rgba(255,255,255,0.04);
+	}
+
+	/* Disable entrance animations on list items to prevent frame drops */
+	.donor-record-card {
+		animation: none !important;
+		transform: none !important;
+	}
+
+	/* Soften interactive transforms to avoid expensive compositing */
+	.button:hover,
+	.blood-pill:hover {
+		transform: none !important;
+		box-shadow: none !important;
+	}
+
+	/* Slightly smaller touch targets for mobile layout while keeping accessibility */
+	.brand-mark { width: 44px; height: 44px; }
+	.button { min-height: 44px; }
+
+	/* Reduce heavy radial/linear gradients on hero to a simpler fill */
+	.hero {
+		padding: 18px;
+		background: rgba(24, 12, 14, 0.88);
+	}
+
+	/* Reduce card paddings to better fit narrow viewports */
+	.panel-card, .section-heading, .control-group, .donor-card {
+		padding: 14px;
+	}
+
+	/* Avoid large text reflows by capping hero heading size a bit more */
+	.hero h1 {
+		font-size: clamp(1.6rem, 6vw, 2.6rem);
+	}
+}

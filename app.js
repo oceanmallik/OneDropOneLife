@@ -59,18 +59,20 @@ function filterAndSortDonors() {
 // 3. Render raw dynamic cards matching requested variables
 function renderCards(donorList) {
     const grid = document.getElementById('donorGrid');
-    grid.innerHTML = ''; // Wipe out previous state
+    // Update DOM once to avoid repeated reflows on mobile devices
+    grid.innerHTML = '';
 
     if (donorList.length === 0) {
         grid.innerHTML = '<p class="status-message">No donor records found matching the selection criteria.</p>';
         return;
     }
 
+    let html = '';
     donorList.forEach((donor, index) => {
         const phone = donor["Contact Number"] || "Not available";
         const hasPhone = phone !== "Not available";
         // Structure strictly contains: Name, ID, Blood Group, Address, Contact Number
-        const cardHTML = `
+        html += `
             <article class="donor-record-card" style="--card-index: ${index};">
                 <div class="donor-record-header">
                     <h3>${donor.Name}</h3>
@@ -86,8 +88,9 @@ function renderCards(donorList) {
                 : `<span class="button button-secondary donor-call donor-call-disabled" aria-disabled="true">Contact Unavailable</span>`}
             </article>
         `;
-        grid.innerHTML += cardHTML;
     });
+
+    grid.innerHTML = html;
 }
 
 // Boot up application
