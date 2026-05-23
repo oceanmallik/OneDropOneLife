@@ -7,7 +7,7 @@
         "Contact Number": "8801326174513"
     },
     {
-        "Name": "River Mallik",
+        "Name": "Dhrubo Mitra",
         "ID": "253-35-088",
         "Blood Group": "O-",
         "Address": "YKSG-1",
@@ -16,8 +16,15 @@
     {
         "Name": "Pond Mallik",
         "ID": "253-35-089",
-        "Blood Group": "A+",
+        "Blood Group": "O+",
         "Address": "YKSG-2",
         "Contact Number": "8801326174513"
+    },
+    {
+        "Name": "Pagla Garod",
+        "ID": "253-35-090",
+        "Blood Group": "A+",
+        "Address": "RASG 1",
+        "Contact Number": "8801535454636"
     }
 ]
