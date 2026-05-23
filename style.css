@@ -263,11 +263,37 @@ a {
 	line-height: 1.6;
 }
 
+.profile-spot {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-top: 4px;
+}
+
+.profile-avatar {
+	width: 62px;
+	height: 62px;
+	border-radius: 18px;
+	object-fit: cover;
+	border: 1px solid rgba(255, 255, 255, 0.16);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
 .stats,
 .content-grid,
 .split-section,
 .contact-band {
 	margin-top: 24px;
+}
+
+.club-band {
+	display: flex;
+	justify-content: center;
+	margin-top: 24px;
+}
+
+.club-band .donor-card {
+	width: min(760px, 100%);
 }
 
 .stats {
@@ -564,6 +590,10 @@ a {
 	.topnav {
 		gap: 14px;
 		flex-wrap: wrap;
+	}
+
+	.profile-spot {
+		align-items: flex-start;
 	}
 
 	.hero h1 {
