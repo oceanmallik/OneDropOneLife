@@ -426,7 +426,8 @@ a {
 
 .donor-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	grid-template-columns: repeat(3, minmax(0, 320px));
+	justify-content: center;
 	gap: 16px;
 	margin-top: 18px;
 }
@@ -445,6 +446,9 @@ a {
 	display: flex;
 	flex-direction: column;
 	gap: 14px;
+	width: 100%;
+	max-width: 320px;
+	min-height: 230px;
 	padding: 18px;
 	border-radius: 22px;
 	border: 1px solid rgba(255, 255, 255, 0.09);
@@ -532,6 +536,10 @@ a {
 		grid-template-columns: 1fr;
 	}
 
+	.donor-grid {
+		grid-template-columns: repeat(2, minmax(0, 320px));
+	}
+
 	.hero {
 		padding: 28px;
 	}
@@ -560,5 +568,9 @@ a {
 
 	.hero h1 {
 		max-width: none;
+	}
+
+	.donor-grid {
+		grid-template-columns: minmax(0, 320px);
 	}
 }
