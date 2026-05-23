@@ -24,12 +24,21 @@
                         <span class="brand-sub">DIUBlood</span>
                     </div>
                 </a>
-                <nav class="topnav" aria-label="Primary navigation">
+                <button class="menu-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+                    <span class="hamburger" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </button>
+                <nav id="primary-navigation" class="topnav" aria-label="Primary navigation">
+                    <button class="drawer-close" aria-label="Close menu">×</button>
                     <a href="/">Home</a>
                     <a href="#search">Find Donors</a>
                     <a href="about.html">About</a>
                 </nav>
             </header>
+            <div id="nav-overlay" class="nav-overlay" aria-hidden="true"></div>
 
             <main id="home">
                 <section class="hero">

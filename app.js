@@ -95,3 +95,63 @@ function renderCards(donorList) {
 
 // Boot up application
 window.onload = fetchDonorData;
+
+// Mobile nav toggle
+(function() {
+    function initNavToggle() {
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.getElementById('primary-navigation');
+        const overlay = document.getElementById('nav-overlay');
+        if (!toggle || !nav) return;
+
+        function closeNav() {
+            toggle.setAttribute('aria-expanded', 'false');
+            nav.classList.remove('open');
+            document.body.classList.remove('nav-open');
+            if (overlay) overlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function openNav() {
+            toggle.setAttribute('aria-expanded', 'true');
+            nav.classList.add('open');
+            document.body.classList.add('nav-open');
+            if (overlay) overlay.setAttribute('aria-hidden', 'false');
+            const closeBtn = nav.querySelector('.drawer-close');
+            if (closeBtn) closeBtn.focus();
+        }
+
+        toggle.addEventListener('click', () => {
+            const expanded = toggle.getAttribute('aria-expanded') === 'true';
+            if (expanded) closeNav(); else openNav();
+        });
+
+        if (overlay) {
+            overlay.addEventListener('click', closeNav);
+        }
+
+        // Close the nav when a link is clicked (mobile behaviour)
+        nav.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', closeNav);
+        });
+
+        // Drawer close button
+        const closeBtn = nav.querySelector('.drawer-close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeNav);
+        }
+
+        // Close with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('open')) {
+                closeNav();
+            }
+        });
+    }
+
+    // Initialize after DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initNavToggle);
+    } else {
+        initNavToggle();
+    }
+})();

@@ -113,6 +113,32 @@ a {
 	color: #d8bcc0;
 }
 
+/* Menu toggle (hamburger) */
+.menu-toggle {
+	display: none;
+	background: transparent;
+	border: none;
+	padding: 6px;
+	margin-left: 8px;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+}
+
+.hamburger {
+	display: inline-block;
+	width: 28px;
+	height: 20px;
+}
+.hamburger span {
+	display: block;
+	height: 2px;
+	background: var(--text);
+	border-radius: 2px;
+	margin: 4px 0;
+	transition: transform 200ms ease, opacity 200ms ease;
+}
+
 .topnav a {
 	transition: color 160ms ease;
 }
@@ -631,15 +657,87 @@ a {
 		padding-top: 12px;
 	}
 
-	.topbar,
+	/* Keep header on a single row: brand + hamburger on the first line */
+	.topbar {
+		flex-direction: row;
+		align-items: center;
+	}
+
+	/* Stack contact band vertically */
 	.contact-band {
 		flex-direction: column;
 		align-items: flex-start;
 	}
 
+	.menu-toggle { display: inline-flex; }
+
+	/* Off-canvas right-side nav for small screens */
 	.topnav {
-		gap: 14px;
-		flex-wrap: wrap;
+		position: fixed;
+		top: 0;
+		right: 0;
+		height: 100vh;
+		width: min(86vw, 340px);
+		max-width: 340px;
+		background: linear-gradient(180deg, rgba(26,15,19,0.98), rgba(20,12,14,0.98));
+		backdrop-filter: blur(8px);
+		box-shadow: -20px 0 40px rgba(0,0,0,0.6);
+		padding: 72px 18px 18px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		transform: translateX(100%);
+		transition: transform 260ms cubic-bezier(.2,.9,.2,1);
+		z-index: 1200;
+		align-items: flex-start;
+	}
+
+	.drawer-close {
+		position: absolute;
+		top: 14px;
+		right: 12px;
+		background: transparent;
+		border: none;
+		color: var(--text);
+		font-size: 26px;
+		line-height: 1;
+		padding: 6px 8px;
+		border-radius: 8px;
+		cursor: pointer;
+		z-index: 1250;
+	}
+
+	.drawer-close:focus {
+		outline: 3px solid rgba(217,31,59,0.22);
+		outline-offset: 2px;
+	}
+
+	.topnav a {
+		padding: 12px 6px;
+		width: 100%;
+		display: inline-block;
+		font-weight: 700;
+		color: var(--text);
+	}
+
+	.topnav.open {
+		transform: translateX(0);
+	}
+
+	/* Overlay behind the nav */
+	.nav-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		background: rgba(0,0,0,0.36);
+		opacity: 0;
+		transition: opacity 200ms ease;
+		z-index: 1100;
+	}
+
+	body.nav-open .nav-overlay {
+		display: block;
+		opacity: 1;
 	}
 
 	.profile-spot {
@@ -708,4 +806,9 @@ a {
 	.hero h1 {
 		font-size: clamp(1.6rem, 6vw, 2.6rem);
 	}
+}
+
+/* When nav is open, prevent body scroll on small screens */
+body.nav-open {
+	overflow: hidden;
 }

@@ -24,12 +24,21 @@
                         <span class="brand-sub">About</span>
                     </div>
                 </a>
-                <nav class="topnav" aria-label="About page navigation">
+                <button class="menu-toggle" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open menu">
+                    <span class="hamburger" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </span>
+                </button>
+                <nav id="primary-navigation" class="topnav" aria-label="About page navigation">
+                    <button class="drawer-close" aria-label="Close menu">×</button>
                     <a href="/">Home</a>
                     <a href="index.html#search">Find Donors</a>
                     <a href="about.html" target="_blank" rel="noreferrer">About</a>
                 </nav>
             </header>
+            <div id="nav-overlay" class="nav-overlay" aria-hidden="true"></div>
 
             <main>
                 <section class="hero">
