@@ -14,7 +14,7 @@ async function fetchDonorData() {
     } catch (error) {
         console.error("Error reading donor database:", error);
         document.getElementById('donorGrid').innerHTML = 
-            `<p>Failed to load donor profiles. Verify that donors.json exists inside your docs folder.</p>`;
+            `<p class="status-message">Failed to load donor profiles. Verify that donors.json exists inside your docs folder.</p>`;
     }
 }
 
@@ -46,24 +46,29 @@ function renderCards(donorList) {
     grid.innerHTML = ''; // Wipe out previous state
 
     if (donorList.length === 0) {
-        grid.innerHTML = '<p>No donor records found matching the selection criteria.</p>';
+        grid.innerHTML = '<p class="status-message">No donor records found matching the selection criteria.</p>';
         return;
     }
 
-    donorList.forEach(donor => {
+    donorList.forEach((donor, index) => {
+        const phone = donor["Contact Number"] || "Not available";
+        const hasPhone = phone !== "Not available";
         // Structure strictly contains: Name, ID, Blood Group, Address, Contact Number
         const cardHTML = `
-            <div>
-                <div>
+            <article class="donor-record-card" style="--card-index: ${index};">
+                <div class="donor-record-header">
                     <h3>${donor.Name}</h3>
-                    <span>${donor["Blood Group"]}</span>
+                    <span class="blood-pill">${donor["Blood Group"]}</span>
                 </div>
-                <div>
+                <div class="donor-record-meta">
                     <p><strong>Student ID:</strong> ${donor.ID}</p>
                     <p><strong>Location:</strong> ${donor.Address}</p>
-                    <p><strong>Contact:</strong> ${donor["Contact Number"]}</p>
+                    <p><strong>Contact:</strong> ${phone}</p>
                 </div>
-            </div>
+                ${hasPhone
+                    ? `<a class="button button-primary donor-call" href="tel:${phone}">Call Donor</a>`
+                    : `<span class="button button-secondary donor-call donor-call-disabled" aria-disabled="true">Contact Unavailable</span>`}
+            </article>
         `;
         grid.innerHTML += cardHTML;
     });

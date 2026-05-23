@@ -372,11 +372,163 @@ a {
 	padding: 28px;
 }
 
+.search-section {
+	margin-top: 28px;
+}
+
+.search-heading h2 {
+	font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.search-controls {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+	margin-top: 16px;
+}
+
+.control-group {
+	padding: 18px;
+	border-radius: 20px;
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+.control-group label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 0.82rem;
+	font-weight: 800;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: #f0b5bc;
+}
+
+.control-group select {
+	width: 100%;
+	min-height: 44px;
+	padding: 0 12px;
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	background: rgba(12, 7, 9, 0.9);
+	color: var(--text);
+	font-size: 0.97rem;
+	font-weight: 600;
+	outline: none;
+	transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.control-group select:focus {
+	border-color: rgba(255, 107, 114, 0.75);
+	box-shadow: 0 0 0 3px rgba(255, 107, 114, 0.2);
+}
+
+.donor-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 16px;
+	margin-top: 18px;
+}
+
+.status-message {
+	margin: 8px 0 0;
+	padding: 22px;
+	text-align: center;
+	border-radius: 18px;
+	border: 1px dashed rgba(255, 255, 255, 0.2);
+	color: #ffb3ba;
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.donor-record-card {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	padding: 18px;
+	border-radius: 22px;
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+		rgba(26, 15, 19, 0.86);
+	box-shadow: 0 15px 32px rgba(0, 0, 0, 0.25);
+	animation: card-rise 380ms ease both;
+	animation-delay: calc(var(--card-index, 0) * 32ms);
+}
+
+.donor-record-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.donor-record-header h3 {
+	margin: 0;
+	font-size: 1.05rem;
+	letter-spacing: -0.02em;
+}
+
+.blood-pill {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 6px 10px;
+	border-radius: 999px;
+	font-size: 0.82rem;
+	font-weight: 800;
+	background: rgba(217, 31, 59, 0.2);
+	color: #ffcad0;
+	border: 1px solid rgba(255, 107, 114, 0.35);
+}
+
+.donor-record-meta {
+	display: grid;
+	gap: 8px;
+}
+
+.donor-record-meta p {
+	margin: 0;
+	line-height: 1.5;
+	color: #ecd8db;
+}
+
+.donor-record-meta strong {
+	color: #ff9ca7;
+}
+
+.donor-call {
+	width: 100%;
+	margin-top: auto;
+	min-height: 44px;
+	font-size: 0.92rem;
+}
+
+.donor-call-disabled {
+	opacity: 0.72;
+	cursor: not-allowed;
+}
+
+@keyframes card-rise {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
 @media (max-width: 960px) {
 	.hero,
 	.content-grid,
 	.split-section,
 	.contact-band {
+		grid-template-columns: 1fr;
+	}
+
+	.search-controls {
 		grid-template-columns: 1fr;
 	}
 

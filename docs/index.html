@@ -45,12 +45,15 @@
                 </section>
 
                 <!-- Search and Filter Section -->
-                <section id="search">
-                    <h2>Find Blood Donors</h2>
-                    
-                    <div>
+                <section id="search" class="search-section">
+                    <div class="section-heading search-heading">
+                        <h2>Find Blood Donors</h2>
+                        <p class="section-copy">Use blood group and location sorting to quickly find the right donor profile.</p>
+                    </div>
+
+                    <div class="search-controls">
                         <!-- Filter dropdown by Blood Group -->
-                        <div>
+                        <div class="control-group">
                             <label for="bloodFilter">Filter by Blood Group</label>
                             <select id="bloodFilter" onchange="filterAndSortDonors()">
                                 <option value="All">All Blood Groups</option>
@@ -66,7 +69,7 @@
                         </div>
 
                         <!-- Sort dropdown by Location -->
-                        <div>
+                        <div class="control-group">
                             <label for="locationSort">Sort by Location</label>
                             <select id="locationSort" onchange="filterAndSortDonors()">
                                 <option value="None">Default Order</option>
@@ -77,8 +80,8 @@
                     </div>
 
                     <!-- Container where the donor cards will dynamically generate from app.js -->
-                    <div id="donorGrid">
-                        <p>Loading donor records...</p>
+                    <div id="donorGrid" class="donor-grid" aria-live="polite">
+                        <p class="status-message">Loading donor records...</p>
                     </div>
                 </section>
             </main>
