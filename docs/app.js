@@ -1,6 +1,18 @@
 // docs/app.js
 
 let allDonors = [];
+const HALL_KEYS = ["yksg1", "yksg2", "yksg3", "rasg1", "rasg2"];
+
+function normalizeLocationText(value) {
+    return String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+}
+
+function addressMatchesHall(address, selectedHall) {
+    const normalizedAddress = normalizeLocationText(address);
+    return normalizedAddress.includes(selectedHall.toLowerCase());
+}
 
 // 1. Fetch JSON data from the docs directory
 async function fetchDonorData() {
@@ -34,6 +46,10 @@ function filterAndSortDonors() {
         processedDonors.sort((a, b) => a.Address.localeCompare(b.Address));
     } else if (locationSortSelection === "DESC") {
         processedDonors.sort((a, b) => b.Address.localeCompare(a.Address));
+    } else if (HALL_KEYS.includes(locationSortSelection.toLowerCase())) {
+        processedDonors = processedDonors.filter(donor =>
+            addressMatchesHall(donor.Address, locationSortSelection)
+        );
     }
 
     // Process C: Print update to DOM
