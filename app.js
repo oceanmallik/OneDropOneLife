@@ -20,12 +20,12 @@ async function fetchDonorData() {
         // Pulls from the file generated from your published CSV link
         const response = await fetch('./donors.json');
         allDonors = await response.json();
-        
+
         // Display data immediately upon load
         filterAndSortDonors();
     } catch (error) {
         console.error("Error reading donor database:", error);
-        document.getElementById('donorGrid').innerHTML = 
+        document.getElementById('donorGrid').innerHTML =
             `<p class="status-message">Failed to load donor profiles. Verify that donors.json exists inside your docs folder.</p>`;
     }
 }
@@ -34,7 +34,7 @@ async function fetchDonorData() {
 function filterAndSortDonors() {
     const bloodSelection = document.getElementById('bloodFilter').value;
     const locationSortSelection = document.getElementById('locationSort').value;
-    
+
     // Process A: Dropdown Filter rule
     let processedDonors = allDonors.filter(donor => {
         if (bloodSelection === "All") return true;
@@ -82,8 +82,8 @@ function renderCards(donorList) {
                     <p><strong>Contact:</strong> ${phone}</p>
                 </div>
                 ${hasPhone
-                    ? `<a class="button button-primary donor-call" href="tel:${phone}">Call Donor</a>`
-                    : `<span class="button button-secondary donor-call donor-call-disabled" aria-disabled="true">Contact Unavailable</span>`}
+                ? `<a class="button button-primary donor-call" href="tel:${phone}">Call Donor</a>`
+                : `<span class="button button-secondary donor-call donor-call-disabled" aria-disabled="true">Contact Unavailable</span>`}
             </article>
         `;
         grid.innerHTML += cardHTML;
