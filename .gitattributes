@@ -1,4 +1,0 @@
-docs/**/*.html linguist-detectable=true
-docs/**/*.css linguist-generated=true
-docs/**/*.js linguist-generated=true
-docs/**/*.json linguist-generated=true
