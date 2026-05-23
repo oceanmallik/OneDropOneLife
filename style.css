@@ -113,6 +113,10 @@ a {
 	color: #d8bcc0;
 }
 
+.drawer-close {
+	display: none;
+}
+
 /* Menu toggle (hamburger) */
 .menu-toggle {
 	display: none;
@@ -693,6 +697,7 @@ a {
 	}
 
 	.drawer-close {
+		display: inline-flex;
 		position: absolute;
 		top: 14px;
 		right: 12px;
