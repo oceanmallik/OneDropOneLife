@@ -1,0 +1,23 @@
+[
+    {
+        "Name": "Ahmed Khan",
+        "ID": "221-35-890",
+        "Blood Group": "A+",
+        "Address": "Dhanmondi, Dhaka",
+        "Contact Number": "+8801712345678"
+    },
+    {
+        "Name": "Sadia Islam",
+        "ID": "223-15-432",
+        "Blood Group": "O-",
+        "Address": "Mirpur, Dhaka",
+        "Contact Number": "+8801987654321"
+    },
+    {
+        "Name": "Tanvir Rahman",
+        "ID": "212-16-765",
+        "Blood Group": "B+",
+        "Address": "Uttara, Dhaka",
+        "Contact Number": "+8801555555555"
+    }
+]
