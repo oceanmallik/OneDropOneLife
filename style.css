@@ -199,6 +199,24 @@ a {
 	border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.panel-actions {
+	display: grid;
+	gap: 12px;
+	margin-top: 18px;
+}
+
+.panel-button {
+	width: 100%;
+	min-height: 46px;
+	padding-inline: 18px;
+}
+
+.panel-highlight .button-secondary {
+	background: rgba(255, 255, 255, 0.14);
+	border-color: rgba(255, 255, 255, 0.22);
+	color: #fff;
+}
+
 .hero-points {
 	display: flex;
 	flex-wrap: wrap;
