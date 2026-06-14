@@ -1,8 +1,8 @@
-# 🩸 OneDropOneLife — DIUBlood
+# 🩸 OneDropOneLife — BloodInfo
 
 > *"5 Amenities Keep You Alive. The 6th Saves You When It Matters Most."*
 
-**DIUBlood** is a blood donor discovery platform built for the Daffodil International University community. It connects people in urgent need of blood with registered donors — quickly, cleanly, and without friction.
+**BloodInfo** is a blood donor discovery platform built for the Daffodil International University community. It connects people in urgent need of blood with registered donors — quickly, cleanly, and without friction.
 
 🌐 **Live Site:** [blood.oceanmallik.com](https://blood.oceanmallik.com)
 
